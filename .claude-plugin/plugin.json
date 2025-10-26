@@ -11,7 +11,7 @@
   "homepage": "https://aivory.net",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.ilscipio.com/ilscipio/projects/aivory-jetbrain.git"
+    "url": "https://github.com/aivorynet/aivory-claude-plugin.git"
   },
   "license": "MIT",
   "keywords": [

@@ -645,7 +645,7 @@ chmod +x .git/hooks/pre-commit
 
 ## Support
 
-- **Issues**: https://gitlab.ilscipio.com/ilscipio/projects/aivory-jetbrain/issues
+- **Issues**: https://github.com/aivorynet/aivory-claude-plugin/issues
 - **Website**: https://aivory.net
 - **Email**: support@aivory.net
 
