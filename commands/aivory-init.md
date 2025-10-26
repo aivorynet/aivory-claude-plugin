@@ -21,8 +21,8 @@ AIVory Guard - Project Initialization
 This wizard will set up AIVory compliance validation for your project.
 
 What we'll configure:
-1. Project compliance standards
-2. MCP server connection
+1. MCP server setup (if not installed)
+2. Project compliance standards
 3. Git hooks (optional)
 4. Backend registration (optional)
 5. Team configuration
@@ -78,11 +78,247 @@ AIVory works best with git-tracked projects. Would you like to:
 Your choice:
 ```
 
-## Phase 2: Configure Compliance Standards
+## Phase 2: MCP Server Setup
 
-### 2.1 Select Compliance Standards
+### 2.1 Check MCP Server Status
+
+Check if AIVory MCP server is installed:
+
+```bash
+# Check if MCP server is configured
+claude mcp list | grep aivory || echo "NOT_FOUND"
+```
+
+### 2.2 If MCP Server Not Found
+
+Display setup instructions:
+
+```markdown
+MCP Server Not Found
+====================
+
+AIVory requires the MCP server to perform compliance scanning.
+
+The MCP server:
+- Communicates with AIVory backend
+- Handles authentication
+- Performs compliance analysis
+
+Would you like to install it now? (yes/no)
+```
+
+If user says **yes**, provide installation command:
+
+```markdown
+Installing AIVory MCP Server
+=============================
+
+I'll guide you through the installation.
+
+First, do you have an AIVory account?
+1. Yes, I have an API key (all 17+ standards, unlimited scans)
+2. No, use free tier (OWASP only, 15 files/scan, 3 scans/day)
+
+Your choice:
+```
+
+**If user chooses option 1 (has API key):**
+
+```markdown
+Great! Let's set up with authentication.
+
+You can get your API key from: https://app.aivory.net/tokens
+
+Steps:
+1. Visit https://app.aivory.net/tokens
+2. Log in to your AIVory account
+3. Copy your API key (starts with 'aiv_' or similar)
+
+(If you don't have an account yet, register at https://aivory.net/register/plans)
+
+Please paste your API key below:
+Your API key: _______
+```
+
+After getting API key, run:
+
+```bash
+claude mcp add \
+  --transport stdio \
+  --env AIVORY_API_KEY=<user-provided-key> \
+  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  aivory \
+  -- npx -y @aivorynet/guard
+```
+
+Show success:
+```markdown
+✓ MCP server installed with authentication
+
+  Access: All 17+ compliance standards
+  Limits: Unlimited scans
+
+  Testing connection...
+```
+
+**If user chooses option 2 (free tier):**
+
+```markdown
+Setting up free tier access.
+
+Free Tier:
+- Standards: OWASP Top 10 only
+- Limits: 15 files per scan, 3 scans per day
+- Upgrade anytime at https://aivory.net/register/plans
+
+Installing...
+```
+
+Run:
+```bash
+claude mcp add \
+  --transport stdio \
+  aivory \
+  -- npx -y @aivorynet/guard
+```
+
+Show success:
+```markdown
+✓ MCP server installed (free tier)
+
+  Access: OWASP Top 10
+  Limits: 15 files/scan, 3 scans/day
+
+  To upgrade: Visit https://aivory.net/register/plans
+
+  Testing connection...
+```
+
+### 2.3 Test MCP Connection
+
+Verify MCP server is working:
+
+```bash
+# Test with health check
+claude mcp list | grep aivory
+```
+
+If successful:
+```markdown
+✓ MCP server connected successfully
+
+Ready to configure project settings.
+```
+
+If failed:
+```markdown
+✗ MCP server installation failed
+
+Please try manually:
+1. Run: npx -y @aivorynet/guard
+2. Check if npx is installed: npx --version
+3. Try again or contact support@aivory.net
+
+Continue without MCP server? (not recommended)
+```
+
+### 2.4 If MCP Server Already Installed
+
+```markdown
+MCP Server Status
+=================
+
+✓ AIVory MCP server is already installed
+
+Current configuration:
+- Server: @aivorynet/guard
+- Status: Active
+
+Would you like to:
+1. Keep current configuration
+2. Reconfigure (add/update API key)
+3. Continue to project setup
+
+Your choice:
+```
+
+If user chooses **2 (Reconfigure)**:
+
+```markdown
+Reconfiguring MCP Server
+=========================
+
+Do you want to:
+1. Add/update API key (get full access to 17+ standards)
+2. Remove API key (downgrade to free tier - OWASP only)
+
+Your choice:
+```
+
+**If option 1 (Add/update API key):**
+```markdown
+Get your API key from: https://app.aivory.net/tokens
+
+Steps:
+1. Visit https://app.aivory.net/tokens
+2. Log in to your AIVory account
+3. Copy your API key
+
+Please paste your API key:
+Your API key: _______
+```
+
+Then:
+```bash
+# Remove old configuration
+claude mcp remove aivory
+
+# Add with new API key
+claude mcp add \
+  --transport stdio \
+  --env AIVORY_API_KEY=<user-provided-key> \
+  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  aivory \
+  -- npx -y @aivorynet/guard
+```
+
+**If option 2 (Remove API key):**
+```bash
+# Remove old configuration
+claude mcp remove aivory
+
+# Add without API key (free tier)
+claude mcp add \
+  --transport stdio \
+  aivory \
+  -- npx -y @aivorynet/guard
+```
+
+## Phase 3: Configure Compliance Standards
+
+### 3.1 Select Compliance Standards
 
 Ask user which standards to enforce:
+
+**IMPORTANT**: Show different options based on authentication status:
+
+**If user installed MCP with API key (authenticated):**
+Show all 17+ standards available.
+
+**If user installed MCP without API key (free tier):**
+```markdown
+Note: Free tier provides OWASP Top 10 only.
+OWASP will be automatically enabled.
+
+To access all 17+ standards:
+- Visit https://aivory.net/register/plans
+- Get your API key
+- Run /aivory-init again to reconfigure
+
+Continue with OWASP only? (yes/no)
+```
+
+If authenticated, ask user which standards to enforce:
 
 ```markdown
 Compliance Standards Selection
@@ -151,9 +387,9 @@ Additional Configuration
    Custom URL (or press Enter for default): []
 ```
 
-## Phase 3: Create Configuration File
+## Phase 4: Create Configuration File
 
-### 3.1 Generate .aivory/config.yml
+### 4.1 Generate .aivory/config.yml
 
 Create project configuration:
 
@@ -217,80 +453,6 @@ Show success:
 ✓ Configuration created: .aivory/config.yml
 
 You can edit this file later to adjust settings.
-```
-
-## Phase 4: MCP Server Setup
-
-### 4.1 Check MCP Server Status
-
-Check if AIVory MCP server is already configured:
-
-```bash
-# Check current MCP configuration
-claude mcp list | grep aivory || echo "Not configured"
-```
-
-### 4.2 Configure MCP Server
-
-If not configured:
-
-```markdown
-MCP Server Setup
-================
-
-AIVory uses Model Context Protocol (MCP) to integrate with Claude Code.
-
-Installing AIVory Guard MCP server...
-```
-
-```bash
-# Add AIVory MCP server
-claude mcp add \
-  --transport stdio \
-  --env AIVORY_API_KEY=${AIVORY_API_KEY:-demo-key} \
-  --env AIVORY_SERVER_URL=${AIVORY_SERVER_URL:-http://localhost:8080} \
-  aivory \
-  -- npx -y @aivorynet/guard
-```
-
-Show result:
-```markdown
-✓ AIVory MCP server configured
-
-The MCP server provides these tools:
-- scan_code: Scan single file
-- batch_scan: Scan multiple files
-- get_config: Get backend configuration
-- get_rules: List compliance rules
-- health_check: Check backend status
-
-Test connection:
-```
-
-Test MCP connection:
-```
-mcp__aivory__health_check
-```
-
-If successful:
-```markdown
-✓ MCP server connected successfully!
-  Backend: http://localhost:8080
-  Version: [version]
-  Standards: 17 loaded
-```
-
-If failed:
-```markdown
-⚠️  Could not connect to backend at http://localhost:8080
-
-To start the backend:
-```bash
-cd aivory-backend
-../venv/Scripts/python app.py
-```
-
-You can continue setup and start the backend later.
 ```
 
 ## Phase 5: Git Hooks (Optional)

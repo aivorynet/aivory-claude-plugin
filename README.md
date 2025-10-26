@@ -22,6 +22,21 @@ This Claude Code plugin works with other AIVory Guard components:
 
 All components can be used independently or together for comprehensive compliance coverage.
 
+## Authentication & Limits
+
+### Free Tier (Unauthenticated)
+- **Standards Available**: OWASP Top 10 only
+- **Rate Limits**: 15 files per scan, 3 scans per day
+- **No registration required** - Start scanning immediately with OWASP compliance
+
+### Authenticated Users
+- **Standards Available**: All 17+ compliance standards (GDPR, HIPAA, PCI-DSS, SOC2, ISO27001, etc.)
+- **No rate limits** - Unlimited scanning
+- **Dashboard access** - Historical metrics and violation tracking
+- **Team features** - Shared configurations and reporting
+
+**Get authenticated access**: Register at [aivory.net/register/plans](https://aivory.net/register/plans) and add your API key during `/aivory-init` setup.
+
 ## Features
 
 ### Multi-Standard Compliance Scanning
@@ -103,9 +118,13 @@ Scan files or directories for compliance violations:
 # Scan specific directory
 /aivory-scan src/auth/
 
-# Scan with specific standards
+# Scan with specific standards (requires authentication for non-OWASP)
 /aivory-scan --standards=OWASP,GDPR
 ```
+
+**Limits**:
+- **Unauthenticated**: OWASP only, max 15 files/scan, 3 scans/day
+- **Authenticated**: All standards, unlimited scans
 
 **Example Output:**
 ```
@@ -195,6 +214,8 @@ Run /aivory-fix for interactive remediation.
 - Compliance scoring and trends
 - Multi-standard awareness
 - Dashboard integration
+
+**Note**: Free tier scans OWASP only. Authenticate at [aivory.net/register/plans](https://aivory.net/register/plans) for access to all 17+ standards.
 
 ### `/aivory-fix` - Interactive Remediation
 
@@ -372,7 +393,9 @@ integration:
 
 - Claude Code installed (`npm install -g @anthropic-ai/claude-code`)
 - Git repository
-- AIVory backend running (optional, for dashboard features)
+- AIVory Guard MCP server (`npx -y @aivorynet/guard`)
+- **Optional**: AIVory account for full access to 17+ standards ([aivory.net/register/plans](https://aivory.net/register/plans))
+- **Optional**: AIVory backend for dashboard features
 
 ### Option 1: Local Installation
 
@@ -445,10 +468,17 @@ integration:
 AIVory plugin requires AIVory Guard MCP server:
 
 ```bash
-# Add MCP server
+# Without authentication (OWASP only, 15 files/scan, 3 scans/day)
 claude mcp add \
   --transport stdio \
-  --env AIVORY_API_KEY=your-key \
+  aivory \
+  -- npx -y @aivorynet/guard
+
+# With authentication (all 17+ standards, unlimited)
+# Register and get your API key from aivory.net/register/plans
+claude mcp add \
+  --transport stdio \
+  --env AIVORY_API_KEY=your-api-key \
   --env AIVORY_SERVER_URL=http://localhost:8080 \
   aivory \
   -- npx -y @aivorynet/guard
