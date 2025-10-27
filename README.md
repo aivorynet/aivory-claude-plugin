@@ -481,7 +481,7 @@ claude mcp add \
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=your-api-key \
-  --env AIVORY_SERVER_URL=https://app.aivory.net \
+  --env AIVORY_SERVER_URL=https://app.aivory.net/mcp \
   aivory \
   -- npx -y @aivorynet/guard
 
