@@ -397,28 +397,30 @@ integration:
 - **Optional**: AIVory account for full access to 17+ standards ([aivory.net/register/plans](https://aivory.net/register/plans))
 - **Optional**: AIVory backend for dashboard features
 
-### Option 1: Local Installation
+### Recommended: Install from AIVory Marketplace
 
 ```bash
-# From project root
-/plugin marketplace add file:///path/to/compide-jetbrain/aivory-claude-plugin
-/plugin install aivory@local
+# Add AIVory marketplace
+/plugin marketplace add aivorynet/claude-marketplace
+
+# Install AIVory compliance plugin
+/plugin install aivory
 ```
 
-### Option 2: GitLab Installation
+### Alternative: Direct GitHub Installation
 
 ```bash
-# Install from GitLab repository
-/plugin marketplace add https://gitlab.ilscipio.com/ilscipio/projects/aivory-jetbrain/aivory-claude-plugin
-/plugin install aivory@gitlab
+# Install directly from GitHub repository
+/plugin marketplace add https://github.com/aivorynet/aivory-claude-plugin
+/plugin install aivory
 ```
 
-### Option 3: NPM Installation (Future)
+### For Development: Local Installation
 
 ```bash
-# Once published to NPM
-/plugin marketplace add npm:@aivorynet/claude-plugin
-/plugin install aivory@npm
+# Install from local directory
+/plugin marketplace add file:///path/to/aivory-claude-plugin
+/plugin install aivory
 ```
 
 ### Verify Installation
