@@ -1,6 +1,5 @@
 {
   "name": "aivory",
-  "displayName": "AIVory Guard - Compliance & Security Platform",
   "description": "Comprehensive compliance validation across 17+ standards (OWASP, GDPR, HIPAA, PCI-DSS, SOC2, ISO27001+). Features AI-generated code detection, branch-aware violation tracking, interactive remediation, and dashboard metrics integration.",
   "version": "1.0.0",
   "author": {
@@ -9,10 +8,7 @@
     "url": "https://aivory.net"
   },
   "homepage": "https://aivory.net",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aivorynet/aivory-claude-plugin.git"
-  },
+  "repository": "https://github.com/aivorynet/aivory-claude-plugin",
   "license": "MIT",
   "keywords": [
     "compliance",
@@ -27,72 +23,5 @@
     "ai-detection",
     "code-review",
     "remediation"
-  ],
-  "categories": [
-    "security",
-    "compliance",
-    "code-quality"
-  ],
-  "icon": "https://aivory.net/images/aivory.svg",
-  "requirements": {
-    "mcp": {
-      "server": "@aivorynet/guard",
-      "version": "^1.0.0"
-    },
-    "tools": [
-      "git",
-      "gh"
-    ]
-  },
-  "configuration": {
-    "enabledStandards": {
-      "type": "array",
-      "description": "Compliance standards to check (leave empty for all)",
-      "default": [],
-      "items": {
-        "type": "string",
-        "enum": [
-          "OWASP",
-          "GDPR",
-          "HIPAA",
-          "PCI-DSS",
-          "SOC2",
-          "ISO27001",
-          "ISO27017",
-          "ISO27018",
-          "CCPA",
-          "DORA",
-          "AML",
-          "EU-AI-ACT",
-          "DSGVO",
-          "NIS2",
-          "TISAX",
-          "GELDWAESCHEGESETZ",
-          "HINWEISGEBERSCHUTZGESETZ"
-        ]
-      }
-    },
-    "confidenceThreshold": {
-      "type": "number",
-      "description": "Minimum confidence score for reporting violations (0-100)",
-      "default": 80,
-      "minimum": 0,
-      "maximum": 100
-    },
-    "enableAiDetection": {
-      "type": "boolean",
-      "description": "Enable AI-generated code detection",
-      "default": true
-    },
-    "autoScanOnCommit": {
-      "type": "boolean",
-      "description": "Automatically scan code before commits",
-      "default": false
-    },
-    "backendUrl": {
-      "type": "string",
-      "description": "AIVory backend URL for dashboard integration",
-      "default": "http://localhost:8080"
-    }
-  }
+  ]
 }
