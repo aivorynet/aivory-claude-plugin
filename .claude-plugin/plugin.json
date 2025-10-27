@@ -1,5 +1,5 @@
 {
-  "name": "aivory",
+  "name": "aiv",
   "description": "Comprehensive compliance validation across 17+ standards (OWASP, GDPR, HIPAA, PCI-DSS, SOC2, ISO27001+). Features AI-generated code detection, branch-aware violation tracking, interactive remediation, and dashboard metrics integration.",
   "version": "1.0.0",
   "author": {
