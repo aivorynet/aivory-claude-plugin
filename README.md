@@ -456,7 +456,7 @@ compliance:
     enabled: true
 
 backend:
-  url: http://localhost:8080
+  url: https://app.aivory.net
   api_key: ${AIVORY_API_KEY}
 
 integration:
@@ -481,7 +481,7 @@ claude mcp add \
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=your-api-key \
-  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 
@@ -602,7 +602,7 @@ The plugin requires AIVory Guard backend for dashboard features. The backend is 
 - **Docker**: `docker pull aivory/guard-backend`
 - **Source**: Available on [aivory.net](https://aivory.net)
 
-Default backend URL: `http://localhost:8080`
+Default backend URL: `https://app.aivory.net`
 
 To configure a different backend URL, edit `.aivory/config.yml`:
 ```yaml

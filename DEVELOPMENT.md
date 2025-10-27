@@ -243,7 +243,7 @@ Uses existing `@aivorynet/guard` MCP server tools:
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=your-key \
-  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 ```
@@ -289,7 +289,7 @@ Shares compliance standards and rules with IntelliJ plugin:
     "confidenceThreshold": 80,
     "enableAiDetection": true,
     "autoScanOnCommit": false,
-    "backendUrl": "http://localhost:8080"
+    "backendUrl": "https://app.aivory.net"
   }
 }
 ```
@@ -320,7 +320,7 @@ compliance:
     on_pr: true
 
 backend:
-  url: http://localhost:8080
+  url: https://app.aivory.net
   api_key: ${AIVORY_API_KEY}
 
 integration:

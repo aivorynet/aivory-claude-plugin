@@ -146,7 +146,7 @@ After getting API key, run:
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=<user-provided-key> \
-  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 ```
@@ -277,7 +277,7 @@ claude mcp remove aivory
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=<user-provided-key> \
-  --env AIVORY_SERVER_URL=http://localhost:8080 \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 ```
@@ -383,7 +383,7 @@ Additional Configuration
 
 4. Backend URL:
    AIVory backend for dashboard and metrics.
-   Default: http://localhost:8080
+   Default: https://app.aivory.net
    Custom URL (or press Enter for default): []
 ```
 
@@ -417,7 +417,7 @@ compliance:
     on_pr: true
 
 backend:
-  url: http://localhost:8080
+  url: https://app.aivory.net
   api_key: ${AIVORY_API_KEY}  # Set via environment variable
 
 integration:
@@ -540,7 +540,7 @@ Register your project with AIVory backend for:
 - Compliance reporting
 
 This requires:
-- Backend running at http://localhost:8080
+- Backend running at https://app.aivory.net
 - Valid API key or user account
 
 Register project now? (yes/no/later)
@@ -552,7 +552,7 @@ If user agrees:
 
 ```bash
 # Register project with backend
-curl -X POST http://localhost:8080/api/v1/projects \
+curl -X POST https://app.aivory.net/api/v1/projects \
   -H "Authorization: Bearer ${AIVORY_API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -568,7 +568,7 @@ Show result:
 ✓ Project registered with AIVory backend
 
 Project ID: abc-123-def
-Dashboard: http://localhost:8080/dashboard/projects/abc-123-def
+Dashboard: https://app.aivory.net/dashboard/projects/abc-123-def
 
 Your scans will now be tracked in the dashboard.
 ```

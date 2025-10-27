@@ -33,7 +33,7 @@ cd aivory-backend
 ```
 
 Or check the configured backend URL:
-- Current: [backendUrl from config, default http://localhost:8080]
+- Current: [backendUrl from config, default https://app.aivory.net]
 - Update in: aivory-claude-plugin/.claude-plugin/plugin.json
 
 Once backend is running, try /aivory-dashboard again.
@@ -68,15 +68,15 @@ Since we don't have direct MCP tools for metrics (yet), use backend HTTP API via
 
 ```bash
 # Get project metrics (requires authentication if backend has it)
-curl -s http://localhost:8080/api/v1/metrics/hotspots
+curl -s https://app.aivory.net/api/v1/metrics/hotspots
 
-curl -s http://localhost:8080/api/v1/metrics/trends
+curl -s https://app.aivory.net/api/v1/metrics/trends
 
-curl -s http://localhost:8080/api/v1/metrics/scores
+curl -s https://app.aivory.net/api/v1/metrics/scores
 
-curl -s http://localhost:8080/api/v1/violations/recent
+curl -s https://app.aivory.net/api/v1/violations/recent
 
-curl -s http://localhost:8080/api/v1/projects
+curl -s https://app.aivory.net/api/v1/projects
 ```
 
 **Note**: Adapt these endpoint calls based on actual backend API structure. Check `aivory-backend/api_endpoints.py` for exact routes.
@@ -94,7 +94,7 @@ AIVory Compliance Dashboard
 Project: [Project Name]
 Branch: [Current Branch or "All Branches"]
 Last Scan: [Timestamp]
-Backend: http://localhost:8080
+Backend: https://app.aivory.net
 
 Overall Compliance Score: 75/100 ⚠️
 Trend: ↓ -5 points (last 7 days)
@@ -300,7 +300,7 @@ What would you like to do?
 2. Scan specific file → /aivory-scan <file>
 3. Review current PR → /aivory-review
 4. View detailed violation list → [Show full list]
-5. Open dashboard in browser → [Open http://localhost:8080/dashboard]
+5. Open dashboard in browser → [Open https://app.aivory.net/dashboard]
 6. Export report → [Generate markdown/PDF report]
 
 Your choice:
