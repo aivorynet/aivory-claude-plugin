@@ -1,0 +1,30 @@
+{
+  "name": "aivory",
+  "displayName": "AIVory Guard Marketplace",
+  "description": "Official AIVory Guard compliance and security plugins for Claude Code",
+  "publisher": {
+    "name": "AIVory, Inc.",
+    "email": "support@aivory.net",
+    "url": "https://aivory.net"
+  },
+  "plugins": [
+    {
+      "name": "aivory",
+      "displayName": "AIVory Guard - Compliance & Security Platform",
+      "description": "Comprehensive compliance validation across 17+ standards (OWASP, GDPR, HIPAA, PCI-DSS, SOC2, ISO27001+). Features AI-generated code detection, branch-aware violation tracking, interactive remediation, and dashboard metrics integration.",
+      "version": "1.0.0",
+      "author": {
+        "name": "AIVory, Inc.",
+        "email": "support@aivory.net",
+        "url": "https://aivory.net"
+      },
+      "homepage": "https://aivory.net",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/aivorynet/aivory-claude-plugin.git"
+      },
+      "license": "MIT",
+      "pluginPath": "."
+    }
+  ]
+}
