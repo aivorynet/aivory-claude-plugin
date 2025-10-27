@@ -146,7 +146,7 @@ After getting API key, run:
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=<user-provided-key> \
-  --env AIVORY_SERVER_URL=https://app.aivory.net/mcp \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 ```
@@ -277,7 +277,7 @@ claude mcp remove aivory
 claude mcp add \
   --transport stdio \
   --env AIVORY_API_KEY=<user-provided-key> \
-  --env AIVORY_SERVER_URL=https://app.aivory.net/mcp \
+  --env AIVORY_SERVER_URL=https://app.aivory.net \
   aivory \
   -- npx -y @aivorynet/guard
 ```
